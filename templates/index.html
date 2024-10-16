@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Laptop Price Predictor</title>
+    <style>
+        body {
+            background-image: linear-gradient(to right, #4facfe, #00f2fe);
+            font-family: 'Roboto', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        label {
+            font-weight: 500;
+        }
+        .btn-primary {
+            width: 100%;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .predicted-price {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #28a745;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Laptop Price Predictor</h1>
+        <form action="/predict" method="POST">
+            <div class="form-group">
+                <label for="company">Brand</label>
+                <select name="company" class="form-control" required>
+                    {% for brand in brands %}
+                    <option value="{{ brand }}">{{ brand }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="type">Type of Laptop</label>
+                <select name="type" class="form-control" required>
+                    {% for type in types %}
+                    <option value="{{ type }}">{{ type }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ram">RAM (in GB)</label>
+                <select name="ram" class="form-control" required>
+                    {% for ram in ram_options %}
+                    <option value="{{ ram }}">{{ ram }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight of the Laptop (in kg)</label>
+                <input type="number" name="weight" class="form-control" step="0.01" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="touchscreen">Touchscreen</label>
+                <select name="touchscreen" class="form-control" required>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ips">IPS</label>
+                <select name="ips" class="form-control" required>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="screen_size">Screen Size (in inches)</label>
+                <input type="number" name="screen_size" class="form-control" step="0.01" min="10" max="18" required>
+            </div>
+            <div class="form-group">
+                <label for="resolution">Screen Resolution</label>
+                <select name="resolution" class="form-control" required>
+                    {% for resolution in resolutions %}
+                    <option value="{{ resolution }}">{{ resolution }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cpu">CPU</label>
+                <select name="cpu" class="form-control" required>
+                    {% for cpu in cpus %}
+                    <option value="{{ cpu }}">{{ cpu }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="hdd">HDD (in GB)</label>
+                <select name="hdd" class="form-control" required>
+                    {% for hdd in hdd_options %}
+                    <option value="{{ hdd }}">{{ hdd }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ssd">SSD (in GB)</label>
+                <select name="ssd" class="form-control" required>
+                    {% for ssd in ssd_options %}
+                    <option value="{{ ssd }}">{{ ssd }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="gpu">GPU</label>
+                <select name="gpu" class="form-control" required>
+                    {% for gpu in gpus %}
+                    <option value="{{ gpu }}">{{ gpu }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="os">OS</label>
+                <select name="os" class="form-control" required>
+                    {% for os in os_options %}
+                    <option value="{{ os }}">{{ os }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Predict Price</button>
+        </form>
+        {% if predicted_price %}
+        <div class="predicted-price">
+            The predicted price of this configuration is: <span class="text-success">{{ predicted_price }}</span>
+        </div>
+        {% endif %}
+    </div>
+    <footer>
+        <p>© 2024 Laptop Price Predictor. All rights reserved.</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
