@@ -93,5 +93,8 @@ def predict():
                                os_options=os_options, 
                                error=str(e))
 
+#if __name__ == '__main__':
+#    app.run(debug=True)
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, ssl_context='adhoc')
+
