@@ -5,8 +5,8 @@ import numpy as np
 app = Flask(__name__)
 
 # Load the model (pipeline) and dataset (df)
-pipe = pickle.load(open(r'D:\model\venv\pipe.pkl', 'rb'))  # This is the model pipeline
-df = pickle.load(open(r'D:\model\venv\data.pkl', 'rb'))  # Dataset
+pipe = pickle.load(open(r'pipe.pkl', 'rb'))  # Adjust file paths as needed
+df = pickle.load(open(r'data.pkl', 'rb'))  # Adjust file paths as needed
 
 # Preparing options for the form
 brands = df['Company'].unique().tolist()
@@ -93,8 +93,10 @@ def predict():
                                os_options=os_options, 
                                error=str(e))
 
-#if __name__ == '__main__':
-#    app.run(debug=True)
-if __name__ == '__main__':
-    app.run(debug=True, ssl_context='adhoc')
+# required entrypoint
+def handler(environ, start_response):
+    from werkzeug.serving import run_simple
+    return run_simple(environ, start_response)
 
+if __name__ == '__main__':
+    app.run(debug=True)
