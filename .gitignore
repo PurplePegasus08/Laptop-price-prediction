@@ -1,1 +1,22 @@
-myenv
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+env/
+.myenv/
+
+# Logs
+*.log
+
+# Ignore model & data files
+*.pkl
+*.csv
+*.xlsx
+
+# Jupyter & editor junk
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.DS_Store
